@@ -8,7 +8,7 @@ class CreateUserEventAttendeesTable extends Migration
 {
     public function up()
     {
-        Schema::create('user_event_attendees', function (Blueprint $table) {
+        Schema::create('user_events_attendees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('event_id')->constrained('events');
@@ -18,6 +18,6 @@ class CreateUserEventAttendeesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('user_event_attendees');
+        Schema::dropIfExists('user_events_attendees');
     }
 }

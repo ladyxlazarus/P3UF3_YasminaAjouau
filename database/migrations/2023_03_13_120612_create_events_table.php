@@ -14,11 +14,10 @@ class CreateEventsTable extends Migration
             $table->text('description');
             $table->string('location');
             $table->dateTime('date');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('created_by')->constrained('users', 'id');
             $table->timestamps();
         });
     }
-
 
     public function down()
     {
