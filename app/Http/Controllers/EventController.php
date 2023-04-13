@@ -27,13 +27,19 @@ class EventController extends Controller
             ]);
         }
     }
+
     public function show($id)
     {
-        $event = Event::with('attendees')->findOrFail($id);
+        $event = Event::with('attendees')->find($id);
+
+        if (!$event) {
+            $errorMessage = 'No se encuentra el evento solicitado';
+            return view('events.show', compact('errorMessage'));
+        }
 
         return view('events.show', compact('event'));
     }
-
+    
     public function create(Request $request)
     {
         return view('events.create');
