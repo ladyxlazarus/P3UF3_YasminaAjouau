@@ -17,7 +17,7 @@
                 <label for="location">Ubicación</label>
                 <input type="text" class="form-control" id="location" name="location" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="max-width:200px">
                 <label for="date">Fecha</label>
                 <input type="datetime-local" class="form-control" id="date" name="date" required>
             </div>

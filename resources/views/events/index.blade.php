@@ -18,39 +18,43 @@
 @section('content')
 <div class="container">
     <h1>Mis eventos</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Título</th>
-                <th>Descripción</th>
-                <th>Ubicación</th>
-                <th>Fecha</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($events as $event)
-            <tr>
-                <td>{{ $event->title }}</td>
-                <td>{{ $event->description }}</td>
-                <td>{{ $event->location }}</td>
-                <td>{{ $event->date }}</td>
-                <td class="btn-group btn-group-sm">
-    <a href="{{ route('events.show', $event->id) }}" class="btn btn-primary rounded mr-2" style="max-height:30px"><i class="fa fa-eye"></i></a>
-    <a href="{{ route('events.edit', $event->id) }}" class="btn btn-success rounded mr-2" style="max-height:30px"><i class="fa fa-edit"></i></a>
-    <a href="{{ route('events.registerAttendee', $event->id) }}" class="btn btn-success rounded mr-2" style="max-height:30px"><i class="fa fa-user-plus"></i></a>
-    <form action="{{ route('events.destroy', $event->id) }}" method="POST" class="d-inline-block">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar este evento?')"><i class="fa fa-trash"></i></button>
-    </form>
-</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <div class="d-flex justify-content-center">
-        {{ $events->links('vendor.pagination.bootstrap-4') }}
-    </div>
+    @if(count($events) > 0)
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Ubicación</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($events as $event)
+                <tr>
+                    <td>{{ $event->title }}</td>
+                    <td>{{ $event->description }}</td>
+                    <td>{{ $event->location }}</td>
+                    <td>{{ $event->date }}</td>
+                    <td class="btn-group btn-group-sm">
+                        <a href="{{ route('events.show', $event->id) }}" class="btn btn-primary rounded mr-2" style="max-height:30px"><i class="fa fa-eye"></i></a>
+                        <a href="{{ route('events.edit', $event->id) }}" class="btn btn-success rounded mr-2" style="max-height:30px"><i class="fa fa-edit"></i></a>
+                        <a href="{{ route('events.registerAttendee', $event->id) }}" class="btn btn-success rounded mr-2" style="max-height:30px"><i class="fa fa-user-plus"></i></a>
+                        <form action="{{ route('events.destroy', $event->id) }}" method="POST" class="d-inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar este evento?')"><i class="fa fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            {{ $events->links('vendor.pagination.bootstrap-4') }}
+        </div>
+    @else
+        <p>No hay eventos disponibles para tu usuario.</p>
+    @endif
 </div>
 @endsection

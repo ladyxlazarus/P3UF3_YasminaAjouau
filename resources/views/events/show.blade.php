@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@if(isset($errorMessage))
+<div class="alert alert-danger">{{ $errorMessage }}</div>
+@endif
+
 @if(session('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     {{ session('success') }}
@@ -9,6 +14,7 @@
 @endif
 @section('content')
 <div class="container">
+    @if(isset($event))
     <h1>{{ $event->title }}</h1>
     <p>{{ $event->description }}</p>
     <p><strong>Ubicación:</strong> {{ $event->location }}</p>
@@ -40,7 +46,7 @@
         @method('DELETE')
         <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar este evento?')">Eliminar Evento</button>
     </form>
-
+    @endif
     <a href="{{ route('events.index') }}" class="btn btn-success">Volver a la Lista</a>
 </div>
 @endsection

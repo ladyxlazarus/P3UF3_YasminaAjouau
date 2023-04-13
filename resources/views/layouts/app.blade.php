@@ -13,8 +13,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
   <!-- JavaScript de Bootstrap -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
 </head>
 
 <body>
@@ -22,17 +20,20 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('events.index') }}">Listar eventos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('events.create') }}">Añadir evento</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('logout') }}">Log out</a>
-          </li>
         </ul>
       </div>
+      <button class="btn btn-danger" style="position:absolute; right:15px;" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+        <i class="fas fa-power-off"></i>
+      </button>
+      <form id="logout-form" action="{{ route('logout') }}" method="GET" style="display: none;">
+        @csrf
+      </form>
     </nav>
   </header>
 
